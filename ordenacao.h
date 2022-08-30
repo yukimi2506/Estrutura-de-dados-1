@@ -5,8 +5,8 @@ void swap(int *a, int *b);
 void bubble(int *vetor, int size);
 
 //merge//
-int mergesort(int *vetor, int inicio, int fim);
-void merge(int *vetor, int inicio, int meio, int fim);
+int mergesort(int *vetor, int inicio, int fim, dados *dado);
+void merge(int *vetor, int inicio, int meio, int fim, dados *dado);
 void print(int vetor[], int TAM);
 
 //selection//

@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
+#include <time.h>
 #include "ordenacao.h"
 
 struct DADOS
@@ -22,8 +23,13 @@ void swap(int *a, int *b)
 
 void bubble(int *vetor, int size)
 {
+    time_t bubble_ini, bubble_fim;
+    float bubble_tempo;
+  
     int i, j;
     int troca = 0, varredura = 0, comparacao = 0;
+
+    bubble_ini = clock();
 
     for(i = 0; i < size - 1; i++)
     {
@@ -39,41 +45,32 @@ void bubble(int *vetor, int size)
         }
         varredura++;
      }
-     printf("Qntd de Troca [%d]\n Qntd de comparacao [%d]\n Qntd de varredura [%d]\n", troca, comparacao, varredura);
+
+     bubble_fim = clock();
+     bubble_tempo = ((float)(bubble_fim - bubble_ini) / CLOCKS_PER_SEC);
+
+     printf("Qntd de Troca [%d]\nQntd de comparacao [%d]\nQntd de varredura [%d]\nTempo:[%f] ", troca, comparacao, varredura, bubble_tempo);
 }
-
-
-void printvetor(const int *vetor, int size)
-{ 
-    int i;
-    for(i = 0; i < size - 1; i++)
-    {
-        printf("[%d] ", vetor[i]);
-        }
-    
-}
-
-
 
 
 //MERGE SORT//
 
-int mergesort(int *vetor, int inicio, int fim)
+int mergesort(int *vetor, int inicio, int fim, dados *dado)
 { 
     int meio;
     
     if(inicio < fim) 
     {
         meio = (inicio + fim) / 2; 
-        mergesort(vetor, inicio, meio); //chama a funcao para as 2 metades
-        mergesort(vetor, meio + 1, fim);//chama a funcao para as 2 metades
-        merge(vetor, inicio, meio, fim); //combina as 2 metades de forma ordenada
+        mergesort(vetor, inicio, meio, dado); //chama a funcao para as 2 metades
+        mergesort(vetor, meio + 1, fim, dado);//chama a funcao para as 2 metades
+        merge(vetor, inicio, meio, fim, dado); //combina as 2 metades de forma ordenada
     }
 
   
 }
 
-void merge(int *vetor, int inicio, int meio, int fim)
+void merge(int *vetor, int inicio, int meio, int fim, dados *dado)
 {
     int *comb, v1, v2, tam;
     int i, j, k;
@@ -119,25 +116,19 @@ void merge(int *vetor, int inicio, int meio, int fim)
     free(comb);
 }
 
-void print(int vetor[], int TAM)
-{
-    int i;
-
-    for(i = 0; i < TAM + 1; i++)
-    {
-        printf("%d\n", vetor[i]);
-        }
-      
- }
-
 
 
 //SELECTION SORT//
 
 void selection(int vetor[], int TAM)
 {
+    time_t selection_ini, selection_fim;
+    float selection_tempo;
+
     int i, j;
     int troca = 0, varredura = 0, comparacao = 0;
+
+    selection_ini = clock();
 
     for(i = 0; i < TAM; i++)
     {
@@ -154,7 +145,10 @@ void selection(int vetor[], int TAM)
         swap(&vetor[i], &vetor[menor]);
         varredura++;
     }
-     printf("Qntd de Troca [%d]\n Qntd de comparacao [%d]\n Qntd de varredura [%d]\n", troca, comparacao, varredura);
+     selection_fim = clock();
+     selection_tempo = ((float)(selection_fim - selection_ini) / CLOCKS_PER_SEC);
+
+     printf("Qntd de Troca [%d]\nQntd de comparacao [%d]\nQntd de varredura [%d]\nTempo: [%f]", troca, comparacao, varredura, selection_tempo);
 
 }
 

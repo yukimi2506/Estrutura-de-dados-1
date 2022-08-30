@@ -1,54 +1,35 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <time.h>
-#include <conio.h>
-#include "ordenacao.h"
+#include<stdlib.h>
+#include<stdio.h>
+#include<time.h>
+#include"ordenacao.h"
 
 int main()
 {
-    
-    clock_t inicio, fim;
-    double gasto;
+time_t merge_ini, merge_fim;
+float merge_tempo;
 
-    inicio = clock();
+dados *merge;
+merge = dadosCriar();
 
-    int i; 
-    int size = 8;
-    int *vetor;
+int g, size = 1000000;
+int inicio = 0, fim = (size - 1);
 
-     vetor = (int *)malloc(size * sizeof(int));
+int *merge_vetor =(int *)malloc(size * sizeof(int));
 
-    for (i = 0; i < size; i++)
-    {
-        vetor[i] = rand() % 10;
-        printf("%d ", vetor[i]);
-    }
-printf("\n\n");
-    mergesort(vetor, 0, 7); 
-    print(vetor, size);   
-    
-    
-    fim = clock();
+for(g=0; g < size; g++)
+  *(merge_vetor + g) = rand() % size;
 
-    gasto =  ((double)(fim - inicio)) / CLOCKS_PER_SEC;
+merge_ini = clock();
+mergesort(merge_vetor, inicio, fim, merge);
+merge_fim = clock();
+merge_tempo = ((float)(merge_fim - merge_ini) / CLOCKS_PER_SEC);
 
-    printf("Tempo gasto: %f\n", gasto); 
+printf("\n(TEMPO DE EXECUCAO): %f(s)\n", merge_tempo);
 
-    free(vetor);
-    vetor = NULL;
+free(merge_vetor);
+dadosLiberar(merge);
 
-    return 0;
+merge_vetor = NULL;
 
+return 0;
 }
-
-
-//int main()
-//{
-  //  int vetor[] = {3, 0, 7, 1, 5, 2, 4, 6};
-     
-    //print(vetor, 8); 
-    //mergesort(vetor, 0, 8 - 1);
-    //qprint(vetor, 8);
-    
-//}///////////////

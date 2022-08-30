@@ -1,43 +1,24 @@
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <time.h>
-#include <conio.h>
-#include "ordenacao.h"
+#include<stdlib.h>
+#include<stdio.h>
+#include"ordenacao.h"
+#include<time.h>
 
 int main()
-{
-    
-    clock_t inicio, fim;
-    double gasto;
+  {
 
-    inicio = clock();
+  int size = 100000, c = 0;
+  int *vetor =(int *) malloc(size * sizeof(int));
 
-    int i; 
-    int size = 8;
-    int *vetor;
-
-     vetor = (int *)malloc(size * sizeof(int));
-
-    for (i = 0; i < size; i++)
+  while(c < size)
     {
-        vetor[i] = rand() % 10;
+    *(vetor + c) = rand() % 100000;
+    c++;
     }
 
-    selection(vetor, size);    
-    
-    //printvetor(vetor, 100000);
-    
-    fim = clock();
+  selection(vetor, size);
 
-    gasto =  ((double)(fim - inicio)) / CLOCKS_PER_SEC;
+  free(vetor);
+  vetor = NULL;
 
-    printf("Tempo gasto: %f\n", gasto); 
-
-    free(vetor);
-    vetor = NULL;
-
-    return 0;
-
-}
+  return 0;
+  }
