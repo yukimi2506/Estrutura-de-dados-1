@@ -157,23 +157,6 @@ void selection(int vetor[], int TAM)
      printf("Qntd de Troca [%d]\n Qntd de comparacao [%d]\n Qntd de varredura [%d]\n", troca, comparacao, varredura);
 
 }
-void swap(int *a, int *b)
-{
-    int aux = *a;
-    *a = *b;
-    *b = aux;
-}
-
-void print(int array[], int TAM)
-{
-    int i;
-    for(i = 0; i < TAM; i++)
-    {
-        printf("%d ", array);
-        }
-
-
- }
 
 
 //QUICK SORT//
